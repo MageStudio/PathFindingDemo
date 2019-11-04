@@ -13,7 +13,7 @@
   },
   "license": "<Your License Here>",
   "dependencies": {
-    "mage-engine": "1.4.0",
+    "mage-engine": "1.5.0",
     "colors": "*",
     "connect": "^3.6.0",
     "http": "0.0.0",

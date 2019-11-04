@@ -148,7 +148,7 @@ export default class Marco extends App {
         const light = new SunLight({
             color: 0xeeeeee,
             intensity: 1,
-            target: { x: 0, y: 0, z: 0},
+            target: { x: 0, y: 0, z: 0 },
             name: 'sunlight'
         });
 
@@ -190,6 +190,21 @@ export default class Marco extends App {
         }));
 
         return new Line(points);
+    }
+
+    moveChaserAlongPath(chaser, path) {
+        if (!path.length) return;
+
+        const pos = path.shift();
+
+        chaser.goTo({
+            x: pos.posX,
+            y: 10,
+            z: pos.posY
+        }, 1000)
+        .then(() => {
+            this.moveChaserAlongPath(chaser, path);
+        });
     }
 
     astar(start, goal) {
@@ -256,12 +271,13 @@ export default class Marco extends App {
         this.createObstacles(NUM_OBSTACLES);
 
         const chaserPlayer = this.drawPlayer(this.chaser, 0xff0000);
-        const targetPlayer = this.drawPlayer(this.target, 0xffffff);
+        this.drawPlayer(this.target, 0xffffff);
 
         this.astar(this.chaser, this.target);
-        console.log('target', this.target);
         const path = this.getPath(this.chaser, this.target);
         this.drawPath(path);
+
+        this.moveChaserAlongPath(chaserPlayer, path, this.target);
 
         this.addAmbientLight();
       	this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
