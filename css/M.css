@@ -72,7 +72,11 @@ canvas {
     width: 100%;
 }
 
-#gui {
+#ui {
+    position: absolute;
+    width: 1vw;
+    height: 1vh;
+    z-index: 101;
 }
 
 #loader {

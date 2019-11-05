@@ -6,6 +6,8 @@ import {
     Line
 } from 'mage-engine';
 
+//import UI from './UI';
+
 const NUM_OBSTACLES = 700;
 const GRID_SIZE = 1000;
 const GRID_STEP = 100;
@@ -257,6 +259,7 @@ export default class Marco extends App {
 
     onCreate() {
 		this.enableInput();
+        //this.enableUI(UI);
 
      	ControlsManager.setOrbitControl();
 
