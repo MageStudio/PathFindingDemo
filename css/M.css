@@ -24,6 +24,7 @@ body {
     height: 100%;
     width: 100%;
     position: absolute;
+    font-family: 'Work Sans' sans-serif;
 }
 
 .game-loader {

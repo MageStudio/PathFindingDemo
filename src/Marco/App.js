@@ -6,7 +6,9 @@ import {
     Line
 } from 'mage-engine';
 
-//import UI from './UI';
+console.log('mage engine App', App);
+
+import UI from './UI';
 
 const NUM_OBSTACLES = 700;
 const GRID_SIZE = 1000;
@@ -257,16 +259,7 @@ export default class Marco extends App {
 		}
     }
 
-    onCreate() {
-		this.enableInput();
-        //this.enableUI(UI);
-
-     	ControlsManager.setOrbitControl();
-
-        SceneManager.setClearColor(0x2c3e50);
-     	SceneManager.camera.position({y: 70, z: 150});
-        SceneManager.camera.lookAt(0, 0, 0);
-
+    start() {
         const positions = this.getPossiblePositions(GRID_SIZE/2, OBSTACLE_SIZE);
         this.grid = this.createGrid(positions);
         this.chaser = this.createChaser();
@@ -281,6 +274,19 @@ export default class Marco extends App {
         this.drawPath(path);
 
         this.moveChaserAlongPath(chaserPlayer, path, this.target);
+    }
+
+    onCreate() {
+		this.enableInput();
+        this.enableUI(UI);
+
+     	ControlsManager.setOrbitControl();
+
+        SceneManager.setClearColor(0x2c3e50);
+     	SceneManager.camera.position({y: 70, z: 150});
+        SceneManager.camera.lookAt(0, 0, 0);
+
+
 
         this.addAmbientLight();
       	this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
