@@ -259,6 +259,10 @@ export default class Marco extends App {
 		}
     }
 
+    clear() {
+
+    }
+
     start() {
         const positions = this.getPossiblePositions(GRID_SIZE/2, OBSTACLE_SIZE);
         this.grid = this.createGrid(positions);

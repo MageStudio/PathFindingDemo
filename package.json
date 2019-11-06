@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "npm run build && npm run start",
     "build": "webpack --config webpack.config.js",
-    "start": "http-server ./ -p"
+    "start": "npm run build && http-server ./ -p"
   },
   "license": "<Your License Here>",
   "dependencies": {
