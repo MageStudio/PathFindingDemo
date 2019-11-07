@@ -1,0 +1,29 @@
+.title {
+    font-size: 120px;
+    margin: 0;
+    color: white;
+    width: 300px;
+    display: inline-block;
+}
+
+#ui {
+    max-width: 300px;
+    margin: 12px;
+    padding: 12px;
+    background: rgba(150, 150, 150, .1);
+}
+
+#ui * {
+  font-family: Staatliches, sans-serif;
+}
+
+button {
+    border: none;
+    height: 40px;
+    width: 120px;
+    /* padding: 12px; */
+    font-size: 18px;
+    background: #2ecc71;
+    border-radius: 4px;
+    margin-right: 20px;
+}

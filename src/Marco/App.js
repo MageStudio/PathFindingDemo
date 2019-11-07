@@ -102,6 +102,7 @@ export default class Marco extends App {
     }
 
   	createObstacles(amount) {
+        this.obstacles = [];
         for (let i=0; i<amount; i++) {
             const node = this.getRandomNode();
 
@@ -117,6 +118,7 @@ export default class Marco extends App {
 
                 cube.setMaterialFromName('lambert');
                 cube.position(pos);
+                this.obstacles.push(cube);
             }
         }
     }
@@ -260,7 +262,10 @@ export default class Marco extends App {
     }
 
     clear() {
-
+        this.linePath.destroy();
+        this.chaserPlayer.destroy();
+        this.targetPlayer.destroy();
+        this.obstacles.forEach(o => o.destroy());
     }
 
     start() {
@@ -270,14 +275,24 @@ export default class Marco extends App {
         this.target = this.createTarget();
         this.createObstacles(NUM_OBSTACLES);
 
-        const chaserPlayer = this.drawPlayer(this.chaser, 0xff0000);
-        this.drawPlayer(this.target, 0xffffff);
+        this.chaserPlayer = this.drawPlayer(this.chaser, 0xff0000);
+        this.targetPlayer = this.drawPlayer(this.target, 0xffffff);
 
         this.astar(this.chaser, this.target);
         const path = this.getPath(this.chaser, this.target);
-        this.drawPath(path);
+        this.linePath = this.drawPath(path);
 
-        this.moveChaserAlongPath(chaserPlayer, path, this.target);
+        this.moveChaserAlongPath(this.chaserPlayer, path, this.target);
+    }
+
+    progressAnimation = (callback) => {
+        setTimeout(() => {
+            document.querySelector('.loader').classList.add('fadeout');
+        }, 5000);
+        setTimeout(() => {
+            document.querySelector('.loader').classList.add('invisible');
+        }, 6000);
+        callback();
     }
 
     onCreate() {
@@ -287,10 +302,8 @@ export default class Marco extends App {
      	ControlsManager.setOrbitControl();
 
         SceneManager.setClearColor(0x2c3e50);
-     	SceneManager.camera.position({y: 70, z: 150});
+     	SceneManager.camera.position({y: 300, z: 700});
         SceneManager.camera.lookAt(0, 0, 0);
-
-
 
         this.addAmbientLight();
       	this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
