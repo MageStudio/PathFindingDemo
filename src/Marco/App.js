@@ -107,7 +107,7 @@ export default class Marco extends App {
             const node = this.getRandomNode();
 
             if (!node.equals(this.target) && !node.equals(this.chaser)) {
-                const cube = this.sceneHelper.addCube(OBSTACLE_SIZE, 0x27ae60, { wireframe: true });
+                const cube = this.sceneHelper.addCube(OBSTACLE_SIZE, 0x018786, { wireframe: true });
                 const pos = {
                     x: node.posX,
                     y: 10,
@@ -275,8 +275,8 @@ export default class Marco extends App {
         this.target = this.createTarget();
         this.createObstacles(NUM_OBSTACLES);
 
-        this.chaserPlayer = this.drawPlayer(this.chaser, 0xff0000);
-        this.targetPlayer = this.drawPlayer(this.target, 0xffffff);
+        this.chaserPlayer = this.drawPlayer(this.chaser, 0xcf6679);
+        this.targetPlayer = this.drawPlayer(this.target, 0x3700b3);
 
         this.astar(this.chaser, this.target);
         const path = this.getPath(this.chaser, this.target);
@@ -301,7 +301,7 @@ export default class Marco extends App {
 
      	ControlsManager.setOrbitControl();
 
-        SceneManager.setClearColor(0x2c3e50);
+        SceneManager.setClearColor(0x222222);
      	SceneManager.camera.position({y: 300, z: 700});
         SceneManager.camera.lookAt(0, 0, 0);
 
