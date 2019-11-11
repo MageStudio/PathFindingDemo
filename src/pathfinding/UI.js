@@ -1,10 +1,35 @@
 import { Component } from 'inferno';
+import { Stats } from 'mage-engine';
 
 export default class UI extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            fps: Stats.fps
+        };
+        this.interval = undefined;
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => {
+            this.setState({
+                fps: Stats.fps,
+                obstacles: this.props.scene.numObstacles
+            });
+        }, 1000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
 
     render() {
 
         const { scene } = this.props;
+        const { fps, obstacles } = this.state;
+
+        const displayFPS = Math.floor(fps);
 
         return (
             <div>
@@ -23,17 +48,19 @@ export default class UI extends Component {
                     </button>
 
                     <div className="input">
-                        <label for="volume">obstsacles</label>
+                        <label for="volume">obstacles {obstacles}</label>
                         <input
+                            onChange={scene.handleObstaclesChange.bind(scene)}
                             type="range"
                             id="start"
                             name="volume"
-                            min="10"
+                            min="100"
                             max="700" />
                     </div>
                     <div className="input">
                         <label for="wireframe">wireframe</label>
                         <input
+                            onChange={scene.handleWireframeChange.bind(scene)}
                             type="checkbox"
                             id="start"
                             name="wireframe"
@@ -41,7 +68,7 @@ export default class UI extends Component {
                             max="700"/>
                     </div>
 
-                    <span className='fps'>67</span>
+                    <span className='fps'>{displayFPS}</span>
                 </div>
             </div>
         );

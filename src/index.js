@@ -1,52 +1,51 @@
- import { Router } from 'mage-engine';
-import Marco from './Marco/App';
+import { Router } from 'mage-engine';
+import App from './pathfinding/App';
 const assets = {
-                    Audio: {},
+    Audio: {},
 
-                    Video: {},
+    Video: {},
 
-                    Images: {},
+    Images: {},
 
-                    Scripts: {"control.js":"assets/scripts/control.js","movement.js":"assets/scripts/movement.js"},
+    Scripts: {"control.js":"assets/scripts/control.js","movement.js":"assets/scripts/movement.js"},
 
-                    Textures: {},
+    Textures: {},
 
-                    Models: {},
+    Models: {},
 
-                    General: {}
-                };
-        const config = {
+    General: {}
+};
 
-            screen: {
-                h : window ? window.innerHeight : 800,
-                w : window ? window.innerWidth : 600,
-                ratio : window ? (window.innerWidth/window.innerHeight) : (600/800),
-                frameRate : 60,
-                alpha: true
-            },
+const config = {
 
-            lights: {
-                shadows: true
-            },
+    screen: {
+        h : window ? window.innerHeight : 800,
+        w : window ? window.innerWidth : 600,
+        ratio : window ? (window.innerWidth/window.innerHeight) : (600/800),
+        frameRate : 60,
+        alpha: true
+    },
 
-            physics: {
-                enabled: false
-            },
+    lights: {
+        shadows: true
+    },
 
-            tween: {
-                enabled: false
-            },
+    physics: {
+        enabled: false
+    },
 
-            camera : {
-                fov : 75,
-                near : 0.1,
-                far : 3000000
-            }
-        };
-     window.addEventListener('load', function() {
+    tween: {
+        enabled: false
+    },
 
-        Router.on('/', Marco); 
+    camera : {
+        fov : 75,
+        near : 0.1,
+        far : 3000000
+    }
+};
 
-
-        Router.start(config, assets, '#gameContainer');
-    });
+window.addEventListener('load', function() {
+    Router.on('/', App);
+    Router.start(config, assets, '#gameContainer');
+});

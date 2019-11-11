@@ -3,17 +3,19 @@ import {
     ControlsManager,
     SceneManager,
     SunLight,
-    Line
+    Line,
+    Plane,
+    Stats
 } from 'mage-engine';
 
 console.log('mage engine App', App);
 
 import UI from './UI';
 
-const NUM_OBSTACLES = 700;
 const GRID_SIZE = 1000;
 const GRID_STEP = 100;
-const OBSTACLE_SIZE = 20;
+const OBSTACLE_SIZE = 15;
+const SIZE = 20;
 
 class Node {
 
@@ -107,7 +109,7 @@ export default class Marco extends App {
             const node = this.getRandomNode();
 
             if (!node.equals(this.target) && !node.equals(this.chaser)) {
-                const cube = this.sceneHelper.addCube(OBSTACLE_SIZE, 0x018786, { wireframe: true });
+                const cube = this.sceneHelper.addCube(OBSTACLE_SIZE, 0x018786, { wireframe: false });
                 const pos = {
                     x: node.posX,
                     y: 10,
@@ -198,6 +200,20 @@ export default class Marco extends App {
         return new Line(points);
     }
 
+    drawExplore() {
+        this.explore.forEach((n) => {
+            const plane = new Plane(SIZE, SIZE, { color: 0xbb86fc });
+            plane.position({
+                x: n.posX,
+                y: -5,
+                z: n.posY
+            });
+            plane.face({ x: n.posX, y: 1, z: n.posY });
+
+            this.planes.push(plane);
+        });
+    }
+
     moveChaserAlongPath(chaser, path) {
         if (!path.length) return;
 
@@ -266,14 +282,15 @@ export default class Marco extends App {
         this.chaserPlayer.destroy();
         this.targetPlayer.destroy();
         this.obstacles.forEach(o => o.destroy());
+        this.planes.forEach(p => p.destroy());
     }
 
     start() {
-        const positions = this.getPossiblePositions(GRID_SIZE/2, OBSTACLE_SIZE);
+        const positions = this.getPossiblePositions(GRID_SIZE/2, SIZE);
         this.grid = this.createGrid(positions);
         this.chaser = this.createChaser();
         this.target = this.createTarget();
-        this.createObstacles(NUM_OBSTACLES);
+        this.createObstacles(this.numObstacles);
 
         this.chaserPlayer = this.drawPlayer(this.chaser, 0xcf6679);
         this.targetPlayer = this.drawPlayer(this.target, 0x3700b3);
@@ -281,8 +298,23 @@ export default class Marco extends App {
         this.astar(this.chaser, this.target);
         const path = this.getPath(this.chaser, this.target);
         this.linePath = this.drawPath(path);
+        this.drawExplore();
 
         this.moveChaserAlongPath(this.chaserPlayer, path, this.target);
+    }
+
+    handleObstaclesChange = ({ target }) => {
+        const { value } = target;
+
+        this.numObstacles = parseInt(value);
+    }
+
+    handleWireframeChange = ({ target }) => {
+        const { checked } = target;
+
+        this.chaserPlayer.setWireframe(checked);
+        this.targetPlayer.setWireframe(checked);
+        this.obstacles.forEach(o => o.setWireframe(checked));
     }
 
     progressAnimation = (callback) => {
@@ -296,8 +328,13 @@ export default class Marco extends App {
     }
 
     onCreate() {
+        this.numObstacles = 500;
+        this.planes = [];
+
 		this.enableInput();
-        this.enableUI(UI);
+        this.enableUI(UI, {
+            fps: Stats.fps
+        });
 
      	ControlsManager.setOrbitControl();
 
