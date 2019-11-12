@@ -109,7 +109,7 @@ export default class Marco extends App {
             const node = this.getRandomNode();
 
             if (!node.equals(this.target) && !node.equals(this.chaser)) {
-                const cube = this.sceneHelper.addCube(OBSTACLE_SIZE, 0x018786, { wireframe: false });
+                const cube = this.sceneHelper.addCube(OBSTACLE_SIZE, 0x018786);
                 const pos = {
                     x: node.posX,
                     y: 10,
@@ -202,7 +202,7 @@ export default class Marco extends App {
 
     drawExplore() {
         this.explore.forEach((n) => {
-            const plane = new Plane(SIZE, SIZE, { color: 0xbb86fc });
+            const plane = new Plane(SIZE, SIZE, { color: 0xbb86fc, transparent: true, opacity: 0.1 });
             plane.position({
                 x: n.posX,
                 y: -5,

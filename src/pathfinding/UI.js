@@ -6,15 +6,18 @@ export default class UI extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fps: Stats.fps
+            fps: 100
         };
         this.interval = undefined;
     }
 
     componentDidMount() {
+        this.unsubscribe = Stats
+            .fps
+            .subscribe(fps => this.setState({ fps }));
+
         this.interval = setInterval(() => {
             this.setState({
-                fps: Stats.fps,
                 obstacles: this.props.scene.numObstacles
             });
         }, 1000)
@@ -22,6 +25,7 @@ export default class UI extends Component {
 
     componentWillUnmount() {
         clearInterval(this.interval);
+        this.unsubscribe();
     }
 
     render() {
