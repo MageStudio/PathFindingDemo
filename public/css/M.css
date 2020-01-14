@@ -1,0 +1,183 @@
+@font-face {
+    font-family: 'OstrichBlack';
+    src: url('../fonts/OstrichSans-Black.otf');
+}
+
+body {
+    overflow: hidden;
+    background-color: #2c3e50;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    display: none;
+    visibility: hidden;
+}
+
+canvas {
+	position:absolute;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	top:0;
+	left:0;
+	z-index: 101;
+}
+
+#gameContainer {
+    z-index: 100;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#ui {
+    position: absolute;
+    z-index: 101;
+}
+
+.loader {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: 110;
+    background-color: #2c3e50;
+}
+
+.loader-box {
+  height: 70px;
+  width: 500px;
+  padding: 20px;
+  background: #ecf0f1;
+  border: 1px solid #2c3e50;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.fadeout {
+    animation: fadeOut 1s;
+}
+
+.loading {
+  font-family: monospace;
+}
+
+.text-blink {
+  animation: blink-animation .6s steps(3, start) infinite;
+  -webkit-animation: blink-animation .6s steps(3, start) infinite;
+}
+
+.text-blink.one {
+  animation-delay: .1s;
+}
+
+.text-blink.two {
+  animation-delay: .2s;
+}
+
+.text-blink.three {
+  animation-delay: .3s;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeOut {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        display: none;
+        opacity: 0;
+    }
+}
+
+@keyframes loader {
+
+	0% {
+		width: 0;
+	}
+
+	20% {
+		width: 10%;
+	}
+
+	25% {
+		width: 24%;
+	}
+
+	43% {
+		width: 41%;
+	}
+
+	56% {
+		width: 50%;
+	}
+
+	66% {
+		width: 52%;
+	}
+
+	71% {
+		width: 60%;
+	}
+
+	75% {
+		width: 76%;
+
+	}
+
+	94% {
+		width: 86%;
+	}
+
+	100% {
+		width: 100%;
+	}
+
+}
+
+.progress-bar {
+	border-radius: 60px;
+	overflow: hidden;
+    width: 100%;
+    height: 6px;
+    margin-top: -4px;
+}
+
+.progress-bar span {
+	display: block;
+}
+
+.bar {
+    background: #eee;
+}
+
+.progress {
+    animation: loader 8s ease forwards;
+    background: #2c3e50;
+    color: #fff;
+    padding: 5px;
+    width: 0;
+}

@@ -8,6 +8,8 @@
   },
   "scripts": {
     "dev": "npm run build && npm run start",
+    "clean": "rimraf dist && rimraf public",
+    "prebuild": "npm run clean",
     "build": "webpack --config webpack.config.js",
     "start": "npm run build && http-server ./ -p"
   },
@@ -15,17 +17,17 @@
   "dependencies": {
     "@babel/plugin-transform-runtime": "7.5.0",
     "@babel/runtime": "7.5.0",
-    "mage-engine": "1.7.2",
-    "colors": "*",
+    "colors": "^1.4.0",
     "connect": "3.6.6",
     "http": "0.0.0",
+    "http-server": "0.11.1",
+    "inferno": "7.3.2",
+    "mage-engine": "1.8.4",
     "node-prefix": "*",
     "open": "6.0.0",
     "path": "0.12.7",
     "serve-static": "1.12.1",
-    "url": "0.11.0",
-    "http-server": "0.11.1",
-    "inferno": "7.3.2"
+    "url": "0.11.0"
   },
   "devDependencies": {
     "@babel/cli": "7.5.0",
@@ -38,6 +40,7 @@
     "@babel/register": "7.4.4",
     "babel-loader": "^8.0.6",
     "babel-plugin-inferno": "6.1.0",
+    "copy-webpack-plugin": "^5.1.1",
     "npm-cli-login": "0.0.10",
     "terser-webpack-plugin": "^2.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",

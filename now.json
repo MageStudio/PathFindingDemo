@@ -1,0 +1,4 @@
+{
+    "name": "pathfinding",
+    "routes": [{ "src": "/", "dest": "/index.html" }]
+}
