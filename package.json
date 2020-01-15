@@ -11,7 +11,7 @@
     "clean": "rimraf dist && rimraf public",
     "prebuild": "npm run clean",
     "build": "webpack --config webpack.config.js",
-    "start": "npm run build && http-server ./ -p"
+    "start": "npm run build && http-server ./public -p"
   },
   "license": "<Your License Here>",
   "dependencies": {
