@@ -1,5 +1,7 @@
 import { Router } from 'mage-engine';
-import App from './pathfinding/App';
+import FlatGrid from './pathfinding/FlatGrid';
+import ThirdPerson from './pathfinding/ThirdPerson';
+
 const assets = {
     Audio: {},
 
@@ -46,6 +48,7 @@ const config = {
 };
 
 window.addEventListener('load', function() {
-    Router.on('/', App);
+    Router.on('/', FlatGrid);
+    Router.on('/thirdperson', ThirdPerson);
     Router.start(config, assets, '#gameContainer');
 });

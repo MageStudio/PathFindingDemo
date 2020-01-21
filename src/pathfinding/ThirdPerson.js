@@ -8,8 +8,6 @@ import {
     Stats
 } from 'mage-engine';
 
-console.log('mage engine App', App);
-
 import UI from './UI';
 
 const GRID_SIZE = 1000;
@@ -56,7 +54,7 @@ class Node {
     return n;
   }
 }
-export default class Marco extends App {
+export default class FlatGrid extends App {
 
     getPossiblePositions(max, size, _values, _boundary) {
         let values = _values || [];
@@ -328,6 +326,7 @@ export default class Marco extends App {
     }
 
     onCreate() {
+        /*
         this.numObstacles = 500;
         this.planes = [];
 
@@ -344,5 +343,13 @@ export default class Marco extends App {
 
         this.addAmbientLight();
       	this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
+        */
+
+        ControlsManager.setOrbitControl();
+
+        SceneManager.setClearColor(0x222222);
+     	SceneManager.camera.position({y: 300, z: 700});
+        SceneManager.camera.lookAt(0, 0, 0);
+        this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
     }
 }
