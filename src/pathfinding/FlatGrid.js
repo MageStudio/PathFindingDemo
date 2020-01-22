@@ -276,11 +276,11 @@ export default class FlatGrid extends App {
     }
 
     clear() {
-        this.linePath.destroy();
-        this.chaserPlayer.destroy();
-        this.targetPlayer.destroy();
-        this.obstacles.forEach(o => o.destroy());
-        this.planes.forEach(p => p.destroy());
+        this.linePath.dispose();
+        this.chaserPlayer.dispose();
+        this.targetPlayer.dispose();
+        this.obstacles.forEach(o => o.dispose());
+        this.planes.forEach(p => p.dispose());
     }
 
     start() {

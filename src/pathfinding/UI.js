@@ -12,9 +12,11 @@ export default class UI extends Component {
     }
 
     componentDidMount() {
-        this.unsubscribe = Stats
+        this.subscription = Stats
             .fps
             .subscribe(fps => this.setState({ fps }));
+
+        console.log(this.unsubscribe);
 
         this.interval = setInterval(() => {
             this.setState({
@@ -25,7 +27,7 @@ export default class UI extends Component {
 
     componentWillUnmount() {
         clearInterval(this.interval);
-        this.unsubscribe();
+        this.subscription.unsubscribe();
     }
 
     render() {
@@ -40,6 +42,7 @@ export default class UI extends Component {
                 <div className='triangle'></div>
                 <div className='elements'>
                     <h1>A*</h1>
+                    <a href='#thirdperson'>THIRDPERSON</a>
                     <button
                         onclick={scene.start.bind(scene)}
                         className='start'>
