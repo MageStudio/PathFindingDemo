@@ -316,14 +316,16 @@ export default class FlatGrid extends App {
     }
 
     progressAnimation = (callback) => {
+        const loader = document.querySelector('.loader');
+        loader.classList.remove('fadeout', 'invisible');
         setTimeout(() => {
-            document.querySelector('.loader').classList.add('fadeout');
+            loader.classList.add('fadeout');
         }, 5000);
         setTimeout(() => {
-            document.querySelector('.loader').classList.add('invisible');
+            loader.classList.add('invisible');
         }, 6000);
         callback();
-    }
+    };
 
     onCreate() {
         /*
