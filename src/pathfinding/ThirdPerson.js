@@ -158,6 +158,8 @@ export default class FlatGrid extends App {
             name: 'sunlight'
         });
 
+        light.position({ y: 300, z: -700 });
+
         return light;
     }
 
@@ -327,6 +329,38 @@ export default class FlatGrid extends App {
         callback();
     };
 
+    setUpCamera = () => {
+        SceneManager.camera.position({y: 300, z: 700});
+        SceneManager.camera.lookAt(0, 0, 0);
+    };
+
+    setUpFloor = () => {
+        const floor = this.sceneHelper.addCube(50, 0xeeeeee);
+
+        floor.setMaterialFromName('lambert');
+        floor.scale({ x: 50, y: 0.5, z: 50});
+    };
+
+    setUpWalls = () => {
+        const positions = [
+            {x: 100, z: 0},
+            {x: 0, z: 100},
+            {x: -100, z: 0},
+            {x: 0, z: -100},
+        ];
+
+        const scales = [
+            { x: 50, y: 2, z: 50},
+            { x: 50, y: 2, z: 50},
+            { x: 50, y: 2, z: 50},
+            { x: 50, y: 2, z: 50}
+        ];
+
+        return positions.map( p => {
+            
+        })
+    }
+
     onCreate() {
         /*
         this.numObstacles = 500;
@@ -336,22 +370,16 @@ export default class FlatGrid extends App {
         this.enableUI(UI, {
             fps: Stats.fps
         });
-
-     	ControlsManager.setOrbitControl();
-
-        SceneManager.setClearColor(0x222222);
-     	SceneManager.camera.position({y: 300, z: 700});
-        SceneManager.camera.lookAt(0, 0, 0);
-
-        this.addAmbientLight();
-      	this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
         */
 
         ControlsManager.setOrbitControl();
-
         SceneManager.setClearColor(0x222222);
-     	SceneManager.camera.position({y: 300, z: 700});
-        SceneManager.camera.lookAt(0, 0, 0);
+
+        this.addAmbientLight();
+        this.setUpCamera();
+
+        this.setUpFloor();
+
         this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
     }
 }
